@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-use config\Comics;
+use App\Models\Comic;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,7 +17,9 @@ class ComicsTableSeeder extends Seeder
     {
         $comics = config('config.comics');
         foreach ($comics as $comic) { 
-
+           Comic::create([
+            $objComic->title = $comic['title'];
+           ]);
         }
             // Esegui l'operazione desiderata per ogni dato nel seeder
     }
