@@ -15,10 +15,16 @@ class ComicsTableSeeder extends Seeder
      */
     public function run()
     {
-        $comics = config('config.comics');
+        $comics = config('comics');
         foreach ($comics as $comic) { 
            Comic::create([
-            $objComic->title = $comic['title'];
+            'title' => $comic['title'],
+            'description' => $comic['description'],
+            'thumb' => $comic['thumb'],
+            'price' => $comic['price'],
+            'series' => $comic['series'],
+            'sale_date' => $comic['sale_date'],
+            'type' => $comic['type'],
            ]);
         }
             // Esegui l'operazione desiderata per ogni dato nel seeder
