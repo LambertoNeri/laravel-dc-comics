@@ -32,15 +32,6 @@
     <div style="height: 100px; width: 300px border: none important!;">
         {{ $comics->links() }}
     </div>
-
-    {{-- <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000/comics?page=1#">1</a></li>
-          <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000/comics?page=2#">2</a></li>
-          <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000/comics?page=3#">3</a></li>
-        </ul>
-    </nav> --}}
-    
 </div>
 
 @endsection

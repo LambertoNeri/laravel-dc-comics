@@ -10,12 +10,14 @@
 
         <div class="mb-3">
             <label for="thumb" class="form-label" style="font-weight:700">Immagine</label>
-            <input type="text" class="form-control" id="thumb" name="thumb">
+            <input type="text" class="form-control @error('title') is-invalid @enderror"  id="thumb" name="thumb" value="{{ old('thumb')}}">
+            <div class="invalid-feedback">
+                @error('title') {{ $message }} @enderror
+            </div>
         </div>
 
-        @csrf
         <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
+            <label for="title" class="form-label" style="font-weight:700">Title</label>
             <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title')}}">
             {{-- da aggiungere per avere il messaggio di errore nel singolo input --}}
             <div class="invalid-feedback">
@@ -27,7 +29,7 @@
 
         <div class="mb-3">
             <label for="price" class="form-label" style="font-weight:700">Prezzo</label>
-            <input type="text" class="form-control" id="price" name="price">
+            <input type="text" class="form-control @error('title') is-invalid @enderror" id="price" name="price" value="{{ old('price')}}">
         </div>
 
         <div class="mb-3">
