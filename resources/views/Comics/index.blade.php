@@ -2,6 +2,15 @@
 
 @section('contents')
 
+
+@if (session('delete_success'))
+        <div class='alert alert-danger'>
+            {{session('delete_success')}}
+        </div>
+    @endif
+
+    <a class="btn btn-primary" href="{{ route('comics.create') }}">New</a>
+
 <div class="container">
     <div class="row row-cols-3">
         @foreach ($comics as $comic)
@@ -21,8 +30,20 @@
                 <li class="list-group-item">{{ $comic->type}}</li>
                 </ul>
                 <div class="card-body">
-                <a href="{{ route('comics.show', ['comic' => $comic->id]) }}" class="card-link">show</a>
-                <a href="/comics/create">create</a>
+                    <a href="{{ route('comics.show', ['comic' => $comic->id]) }}" class="card-link btn btn-primary">show</a>
+                    <a  
+                        class="btn btn-warning"
+                        href="{{ route('comics.edit', ['comic' => $comic->id]) }}">
+                        edit
+                    </a>
+                    <form 
+                        action="{{ route('comics.destroy', ['comic' => $comic->id]) }}" 
+                        method="post"
+                        class="d-inline-block">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-danger">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>

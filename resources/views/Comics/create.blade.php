@@ -2,7 +2,7 @@
 
 @section('contents')
 <div class="p-5" style="margin-inline: 10rem">
-    <h1>Inserisci un nuovo Comic</h1>
+    <h1>Insert new Comic</h1>
     <form method="POST" action="{{ route('comics.store') }}">
         {{-- Per protezione dati --}}
         @csrf 

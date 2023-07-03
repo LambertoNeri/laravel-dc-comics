@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class ComicController extends Controller
 {
+    private $validations= [
+        'title'           => 'required|string|max:50',
+        'description'     => 'required|string|max:2000',
+        'thumb'           => 'required|string|max:2000',
+        'price'           => 'required|string|max:100',
+        'series'          => 'required|string|max:100',
+        'sale_date'       => 'required|date',
+        'type'            => 'required|string|max:100',
+    ];
     
     public function index()
     {
@@ -23,15 +32,7 @@ class ComicController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'title'           => 'required|string|max:50',
-            'description'     => 'required|string|max:2000',
-            'thumb'           => 'required|string|max:2000',
-            'price'           => 'required|string|max:100',
-            'series'          => 'required|string|max:100',
-            'sale_date'       => 'required|date',
-            'type'            => 'required|string|max:100',
-        ]);
+        $request->validate($this->validations);
 
 
 
@@ -53,5 +54,38 @@ class ComicController extends Controller
     public function show(Comic $comic)
     {
         return view('comics.show', compact('comic'));
+    }
+
+    public function edit(Comic $comic)
+    {
+        return view('comics.edit', compact('comic'));
+    }
+
+ 
+    public function update(Request $request, Comic $comic)
+    {
+        $request->validate($this->validations);
+
+        $data = $request->all();
+
+        $comic->title       = $data['title'];
+        $comic->description = $data['description'];
+        $comic->thumb       = $data['thumb'];
+        $comic->price       = $data['price'];
+        $comic->series      = $data['series'];
+        $comic->sale_date   = $data['sale_date'];
+        $comic->type        = $data['type'];
+        $comic->update();
+
+       return to_route('comics.show', ['comic' => $comic->id]);
+    }
+
+
+    public function destroy(Comic $comic)
+    {
+        $comic->delete();
+
+        return to_route('comics.index')->with('delete_success', "\"{$comic->title}\" is now deleted");
+        // return "sono il destroy";
     }
 }
